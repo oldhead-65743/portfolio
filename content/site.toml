@@ -1,5 +1,5 @@
 # サイト全体設定。base_url を本番URLに変えて再ビルドすれば OGP/canonical/sitemap が確定します。
-base_url = "https://shun-harua-65743.github.io/portfolio"
+base_url = "https://oldhead-65743.github.io/portfolio"
 site_name = "若尾 俊 SHUN WAKAO"
 artist_ja = "若尾 俊"
 artist_en = "SHUN WAKAO"
