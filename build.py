@@ -145,6 +145,14 @@ def now_group(site):
         return ''
     return '    <div class="now-group">\n' + '\n'.join(parts) + '\n    </div>'
 
+def ym_ja(s):
+    """'2026.09' -> '2026年9月'（桁揃えなし）。変換できなければそのまま返す。"""
+    try:
+        y, m = str(s).split('.')
+        return '%s年%d月' % (y, int(m))
+    except Exception:
+        return s
+
 def _exh_box(cfg, modifier='', lang='ja'):
     if not cfg.get('enabled'):
         return ''
@@ -367,7 +375,7 @@ def page_exhibitions(site, works):
                 d, name = date_en(e['date']), e.get('name_en', e['name'])
                 venue, links = e.get('venue_en', e['venue']), ''
             else:
-                d, name, venue = e['date'], e['name'], e['venue']
+                d, name, venue = ym_ja(e['date']), e['name'], e['venue']
                 links = '　'.join(wlink(s) for s in e['works'])
             out.append('      <div class="exh-row">\n'
                        '        <span class="exh-row__date">%s</span>\n'
@@ -385,9 +393,9 @@ def page_exhibitions(site, works):
         h_exh = 'Group Exhibitions' if en else 'グループ展'
         h_ws = 'Workshop' if en else 'ワークショップ'
         h_aw = 'Award' if en else '受賞'
-        ws_d = date_en(ws['date']) if en else ws['date']
+        ws_d = date_en(ws['date']) if en else ym_ja(ws['date'])
         ws_t = ws.get('text_en', ws['text']) if en else ws['text']
-        aw_d = date_en(aw['date']) if en else aw['date']
+        aw_d = date_en(aw['date']) if en else ym_ja(aw['date'])
         aw_t = aw.get('text_en', aw['text']) if en else aw['text']
         return ('      <div class="exh-lang" data-lang="%s" lang="%s"%s>\n'
                 '%s'
@@ -439,7 +447,7 @@ def page_about(site):
     def lang_block(lang, bio, cv, head_label, link_label, hidden):
         bios = '\n'.join('          <p>%s%s</p>' % ('　' if lang == 'ja' else '', T(p)) for p in bio)
         rows = '\n'.join('              <span class="about-cv__d">%s</span><span>%s</span>'
-                         % (T(a), T(b)) for a, b in cv)
+                         % (T(ym_ja(a) if lang == 'ja' else a), T(b)) for a, b in cv)
         hid = ' hidden' if hidden else ''
         aria_bio = '略歴' if lang == 'ja' else 'Biography'
         aria_cv = '学歴・職歴' if lang == 'ja' else 'Education / Career'
