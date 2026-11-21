@@ -69,7 +69,7 @@ cv_en = [
 slug = "mizu"
 title = "《水の囀り》"
 year = "2024"
-place = "AKAP 夏展　安曇野市立高橋節郎記念美術館 南の蔵"
+place = "AKAP 夏展　安曇野髙橋節郎記念美術館 南の蔵"
 alt = "《水の囀り》木造の蔵に白い布をかけた展示台が置かれている"
 
 [[slideshow]]
@@ -142,7 +142,7 @@ works = ["ame"]
 date = "2024.09"
 name = "AKAP 夏展"
 name_en = "AKAP Summer Exhibition"
-venue = "安曇野市立高橋節郎記念美術館 南の蔵（長野県安曇野市）　2024年9月23日〜2024年10月1日"
+venue = "安曇野髙橋節郎記念美術館 南の蔵（長野県安曇野市）　2024年9月23日〜2024年10月1日"
 venue_en = "Azumino Takahashi Setsuro Memorial Art Museum, South Warehouse, Azumino, Nagano, Japan"
 works = ["mizu"]
 
