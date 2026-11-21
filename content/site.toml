@@ -21,9 +21,9 @@ maintenance_note = "お問い合わせフォームは現在準備中です。ご
 enabled = true   # 開催中の展示がないときは false で非表示
 label = "NOW ON VIEW"
 title = "見る聞く うるし"
-title_en = "Seeing and Hearing Urushi"
+title_en = "Miru Kiku Urushi"
 meta = "2026年9月12日〜12月6日　安曇野髙橋節郎記念美術館（長野県安曇野市）"
-meta_en = "Sep 12 – Dec 6, 2026 · Azumino Setsuro Takahashi Memorial Art Museum, Nagano, Japan"
+meta_en = "Sep 12 – Dec 6, 2026 · Azumino Takahashi Setsuro Memorial Art Museum, Nagano, Japan"
 link = "exhibitions.html"
 more = "詳しく見る →"
 work_link = "works/replay.html"       # 展示作品ページ（Exhibitionsの枠内に表示）
@@ -118,17 +118,17 @@ alt = "《科学と芸術》展示室の台にヨーグルトメーカー型の�
 [[exhibitions]]
 date = "2026.09"
 name = "見る聞く うるし"
-name_en = "Seeing and Hearing Urushi"
+name_en = "Miru Kiku Urushi"
 venue = "安曇野髙橋節郎記念美術館（長野県安曇野市）　9月12日〜12月6日"
-venue_en = "Azumino Setsuro Takahashi Memorial Art Museum, Azumino, Nagano, Japan"
+venue_en = "Azumino Takahashi Setsuro Memorial Art Museum, Azumino, Nagano, Japan"
 works = ["replay"]
 
 [[exhibitions]]
 date = "2025.09"
 name = "長野市芸術館アート・グループ展 2025"
-name_en = "Nagano City Arts Center Group Exhibition 2025"
+name_en = "Nagano-shi Geijutsukan Art Group Exhibition 2025"
 venue = "長野市芸術館（長野県長野市）　9月13日〜22日"
-venue_en = "Nagano City Arts Center, Nagano, Japan"
+venue_en = "Nagano-shi Geijutsukan, Nagano, Nagano, Japan"
 works = ["inori", "kaze"]
 
 [[exhibitions]]
@@ -144,7 +144,7 @@ date = "2024.09"
 name = "AKAP 夏展"
 name_en = "AKAP Summer Exhibition"
 venue = "安曇野市立高橋節郎記念美術館 南の蔵（長野県安曇野市）　9月23日〜10月1日"
-venue_en = "Azumino Municipal Setsuro Takahashi Memorial Art Museum, South Warehouse, Azumino, Nagano, Japan"
+venue_en = "Azumino Takahashi Setsuro Memorial Art Museum, South Warehouse, Azumino, Nagano, Japan"
 works = ["mizu"]
 
 [[exhibitions]]
