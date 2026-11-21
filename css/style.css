@@ -465,8 +465,15 @@ img { display: block; }
   padding: 24px 32px 80px;
   display: flex;
   flex-direction: column;
+  gap: 48px;
+}
+
+.exh-lang {
+  display: flex;
+  flex-direction: column;
   gap: 64px;
 }
+.exh-lang[hidden] { display: none; }
 
 .exh-now {
   display: flex;

@@ -21,7 +21,9 @@ maintenance_note = "お問い合わせフォームは現在準備中です。ご
 enabled = true   # 開催中の展示がないときは false で非表示
 label = "NOW ON VIEW"
 title = "見る聞く うるし"
+title_en = "Seeing and Hearing Urushi"
 meta = "2026年9月12日〜12月6日　安曇野髙橋節郎記念美術館（長野県安曇野市）"
+meta_en = "Sep 12 – Dec 6, 2026 · Azumino Setsuro Takahashi Memorial Art Museum, Nagano, Japan"
 link = "exhibitions.html"
 more = "詳しく見る →"
 work_link = "works/replay.html"       # 展示作品ページ（Exhibitionsの枠内に表示）
@@ -32,7 +34,9 @@ event_url = "http://azumino-bunka.com/news/setsuro/news3475/"  # 展覧会公式
 enabled = true
 label = "UPCOMING"
 title = "亀山トリエンナーレ2027"
+title_en = "Kameyama Triennale 2027"
 meta = "2027年10月31日〜11月20日　三重県亀山市内"
+meta_en = "Oct 31 – Nov 20, 2027 · Kameyama, Mie, Japan"
 link = "exhibitions.html"
 more = "詳しく見る →"
 event_url = "https://kameyamatriennale.com/gui-shantorien-nare-2027.html"  # 展覧会公式ページ
@@ -114,43 +118,57 @@ alt = "《科学と芸術》展示室の台にヨーグルトメーカー型の�
 [[exhibitions]]
 date = "2026.09"
 name = "見る聞く うるし"
+name_en = "Seeing and Hearing Urushi"
 venue = "安曇野髙橋節郎記念美術館（長野県安曇野市）　9月12日〜12月6日"
+venue_en = "Azumino Setsuro Takahashi Memorial Art Museum, Azumino, Nagano, Japan"
 works = ["replay"]
 
 [[exhibitions]]
 date = "2025.09"
 name = "長野市芸術館アート・グループ展 2025"
+name_en = "Nagano City Arts Center Group Exhibition 2025"
 venue = "長野市芸術館（長野県長野市）　9月13日〜22日"
+venue_en = "Nagano City Arts Center, Nagano, Japan"
 works = ["inori", "kaze"]
 
 [[exhibitions]]
 date = "2025.01"
 name = "AKAP 冬展"
+name_en = "AKAP Winter Exhibition"
 venue = "穂高学習センター「みらい」（長野県安曇野市）　1月19日〜2月2日"
+venue_en = "Hotaka Learning Center 'Mirai', Azumino, Nagano, Japan"
 works = ["ame"]
 
 [[exhibitions]]
 date = "2024.09"
 name = "AKAP 夏展"
+name_en = "AKAP Summer Exhibition"
 venue = "安曇野市立高橋節郎記念美術館 南の蔵（長野県安曇野市）　9月23日〜10月1日"
+venue_en = "Azumino Municipal Setsuro Takahashi Memorial Art Museum, South Warehouse, Azumino, Nagano, Japan"
 works = ["mizu"]
 
 [[exhibitions]]
 date = "2024.01"
 name = "安曇野市×京都芸術大学連携アートプロジェクト"
+name_en = "Azumino City x Kyoto University of Arts Collaborative Art Project"
 venue = "穂高学習センター「みらい」（長野県安曇野市）　1月17日〜2月1日"
+venue_en = "Hotaka Learning Center 'Mirai', Azumino, Nagano, Japan"
 works = ["snow"]
 
 [[exhibitions]]
 date = "2023.09"
 name = "安曇野市×京都芸術大学連携アートプロジェクト"
+name_en = "Azumino City x Kyoto University of Arts Collaborative Art Project"
 venue = "穂高学習センター「みらい」（長野県安曇野市）　9月17日〜24日"
+venue_en = "Hotaka Learning Center 'Mirai', Azumino, Nagano, Japan"
 works = ["kagaku"]
 
 [workshop]
 date = "2023.09"
 text = "安曇野市×京都芸術大学連携アートプロジェクト　安曇野市立豊科北中学校"
+text_en = "Azumino City x Kyoto University of Arts Collaborative Art Project, Toyoshina Kita Junior High School, Azumino, Nagano, Japan"
 
 [award]
 date = "2025.02"
 text = "京都芸術大学 大学院修了展　優秀賞"
+text_en = "Kyoto University of Arts Graduate School Completion Exhibition, Excellence Award"

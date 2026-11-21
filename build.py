@@ -145,17 +145,24 @@ def now_group(site):
         return ''
     return '    <div class="now-group">\n' + '\n'.join(parts) + '\n    </div>'
 
-def _exh_box(cfg, modifier=''):
+def _exh_box(cfg, modifier='', lang='ja'):
     if not cfg.get('enabled'):
         return ''
     cls = 'exh-now' + ((' ' + modifier) if modifier else '')
-    aria = '次回展示' if modifier else '開催中'
+    en = (lang == 'en')
+    if en:
+        aria = 'Upcoming' if modifier else 'Now on view'
+    else:
+        aria = '次回展示' if modifier else '開催中'
+    title = cfg.get('title_en') if en and cfg.get('title_en') else cfg.get('title')
+    meta = cfg.get('meta_en') if en and cfg.get('meta_en') else cfg.get('meta')
     links = []
     if cfg.get('work_link'):
-        links.append('<a href="%s">作品ページ →</a>' % A(cfg['work_link']))
+        links.append('<a href="%s">%s</a>'
+                     % (A(cfg['work_link']), 'Work page →' if en else '作品ページ →'))
     if cfg.get('event_url'):
-        links.append('<a href="%s" target="_blank" rel="noopener">展覧会ページ ↗</a>'
-                     % A(cfg['event_url']))
+        links.append('<a href="%s" target="_blank" rel="noopener">%s</a>'
+                     % (A(cfg['event_url']), 'Exhibition ↗' if en else '展覧会ページ ↗'))
     links_html = ''
     if links:
         links_html = ('        <p class="exh-now__links">%s</p>\n'
@@ -165,12 +172,12 @@ def _exh_box(cfg, modifier=''):
             '        <p class="exh-now__title">%s</p>\n'
             '        <p class="exh-now__meta">%s</p>\n'
             '%s'
-            '      </section>' % (cls, aria, T(cfg['label']), T(cfg['title']),
-                                  T(cfg['meta']), links_html))
+            '      </section>' % (cls, aria, T(cfg['label']), T(title),
+                                  T(meta), links_html))
 
-def exh_now_group(site):
-    parts = [_exh_box(site.get('now_on_view', {})),
-             _exh_box(site.get('upcoming', {}), 'exh-now--upcoming')]
+def exh_now_group(site, lang='ja'):
+    parts = [_exh_box(site.get('now_on_view', {}), '', lang),
+             _exh_box(site.get('upcoming', {}), 'exh-now--upcoming', lang)]
     parts = [p for p in parts if p]
     if not parts:
         return ''
@@ -342,48 +349,83 @@ def page_exhibitions(site, works):
                "name": "Exhibitions ｜ 若尾 俊", "itemListElement": items}]
     desc = ("若尾 俊の展示・ワークショップ・受賞の記録。長野市芸術館アート・グループ展、"
             "AKAP 夏展・冬展、安曇野市×京都芸術大学連携アートプロジェクトほか。")
-    now = exh_now_group(site)
+    MONTHS = ['', 'Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'Jun.',
+              'Jul.', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.']
+    def date_en(d):
+        y, m = d.split('.')
+        return '%s %s' % (MONTHS[int(m)], y)
     def wlink(s):
         w = works[s]
         if w['published']:
             return '<a href="works/%s.html">《%s》</a>' % (w['slug'], T(w['title']))
         return '《%s》' % T(w['title'])
-    rows = []
-    for e in site['exhibitions']:
-        links = '　'.join(wlink(s) for s in e['works'])
-        rows.append('      <div class="exh-row">\n'
-                    '        <span class="exh-row__date">%s</span>\n'
-                    '        <div class="exh-row__body">\n'
-                    '          <span class="exh-row__name">%s</span>\n'
-                    '          <span class="exh-row__venue">%s</span>\n'
-                    '          <span class="exh-row__works">%s</span>\n'
-                    '        </div>\n'
-                    '      </div>' % (T(e['date']), T(e['name']), T(e['venue']), links))
+    def exh_rows(lang):
+        en = (lang == 'en')
+        out = []
+        for e in site['exhibitions']:
+            if en:
+                d, name = date_en(e['date']), e.get('name_en', e['name'])
+                venue, links = e.get('venue_en', e['venue']), ''
+            else:
+                d, name, venue = e['date'], e['name'], e['venue']
+                links = '　'.join(wlink(s) for s in e['works'])
+            out.append('      <div class="exh-row">\n'
+                       '        <span class="exh-row__date">%s</span>\n'
+                       '        <div class="exh-row__body">\n'
+                       '          <span class="exh-row__name">%s</span>\n'
+                       '          <span class="exh-row__venue">%s</span>\n'
+                       '          <span class="exh-row__works">%s</span>\n'
+                       '        </div>\n'
+                       '      </div>' % (T(d), T(name), T(venue), links))
+        return '\n\n'.join(out)
     ws, aw = site['workshop'], site['award']
+    def panel(lang, hidden):
+        en = (lang == 'en')
+        hid = ' hidden' if hidden else ''
+        h_exh = 'Group Exhibitions' if en else 'グループ展'
+        h_ws = 'Workshop' if en else 'ワークショップ'
+        h_aw = 'Award' if en else '受賞'
+        ws_d = date_en(ws['date']) if en else ws['date']
+        ws_t = ws.get('text_en', ws['text']) if en else ws['text']
+        aw_d = date_en(aw['date']) if en else aw['date']
+        aw_t = aw.get('text_en', aw['text']) if en else aw['text']
+        return ('      <div class="exh-lang" data-lang="%s" lang="%s"%s>\n'
+                '%s'
+                '    <section class="exh-section">\n'
+                '      <h2 class="exh-section__title">%s</h2>\n\n%s\n'
+                '    </section>\n\n'
+                '    <div class="exh-cols">\n'
+                '      <section class="exh-col">\n'
+                '        <h2 class="exh-section__title">%s</h2>\n'
+                '        <div class="exh-mini">\n'
+                '          <span class="exh-mini__date">%s</span>\n          <span>%s</span>\n'
+                '        </div>\n'
+                '      </section>\n\n'
+                '      <section class="exh-col">\n'
+                '        <h2 class="exh-section__title">%s</h2>\n'
+                '        <div class="exh-mini">\n'
+                '          <span class="exh-mini__date">%s</span>\n          <span>%s</span>\n'
+                '        </div>\n'
+                '      </section>\n'
+                '    </div>\n'
+                '      </div>'
+                % (lang, lang, hid, exh_now_group(site, lang), T(h_exh), exh_rows(lang),
+                   T(h_ws), T(ws_d), T(ws_t), T(h_aw), T(aw_d), T(aw_t)))
     main = ('  <main class="main main--exh">\n'
-            '    <h1 class="page-title">Exhibitions</h1>\n\n'
-            '%s'
-            '    <section class="exh-section">\n'
-            '      <h2 class="exh-section__title">グループ展</h2>\n\n%s\n'
-            '    </section>\n\n'
-            '    <div class="exh-cols">\n'
-            '      <section class="exh-col">\n'
-            '        <h2 class="exh-section__title">ワークショップ</h2>\n'
-            '        <div class="exh-mini">\n'
-            '          <span class="exh-mini__date">%s</span>\n          <span>%s</span>\n'
-            '        </div>\n'
-            '      </section>\n\n'
-            '      <section class="exh-col">\n'
-            '        <h2 class="exh-section__title">受賞</h2>\n'
-            '        <div class="exh-mini">\n'
-            '          <span class="exh-mini__date">%s</span>\n          <span>%s</span>\n'
-            '        </div>\n'
-            '      </section>\n'
-            '    </div>\n  </main>'
-            % (now, '\n\n'.join(rows), T(ws['date']), T(ws['text']), T(aw['date']), T(aw['text'])))
+            '    <div class="about-head">\n'
+            '      <h1 class="page-title">Exhibitions</h1>\n'
+            '      <div class="lang-toggle" role="group" aria-label="表示言語 / Language" data-lang-toggle>\n'
+            '        <button type="button" data-lang="ja" aria-pressed="true">日本語</button>\n'
+            '        <button type="button" data-lang="en" aria-pressed="false">English</button>\n'
+            '      </div>\n'
+            '    </div>\n\n'
+            '%s\n\n'
+            '%s\n'
+            '  </main>' % (panel('ja', False), panel('en', True)))
     h = head(site, 'Exhibitions ｜ 若尾 俊 SHUN WAKAO', desc, 'exhibitions.html', 'website',
              '/images/04-mizu/1.jpg', jsonld, pfx)
-    return '\n'.join([h, header(site, 'exhibitions', pfx), main, footer(site), '</body>', '</html>', ''])
+    return '\n'.join([h, header(site, 'exhibitions', pfx), main, footer(site),
+                      '<script src="js/lang.js"></script>', '</body>', '</html>', ''])
 
 def page_about(site):
     pfx = ''

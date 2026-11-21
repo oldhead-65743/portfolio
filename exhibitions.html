@@ -41,8 +41,15 @@
     </nav>
   </header>
   <main class="main main--exh">
-    <h1 class="page-title">Exhibitions</h1>
+    <div class="about-head">
+      <h1 class="page-title">Exhibitions</h1>
+      <div class="lang-toggle" role="group" aria-label="表示言語 / Language" data-lang-toggle>
+        <button type="button" data-lang="ja" aria-pressed="true">日本語</button>
+        <button type="button" data-lang="en" aria-pressed="false">English</button>
+      </div>
+    </div>
 
+      <div class="exh-lang" data-lang="ja" lang="ja">
     <div class="exh-now-group">
       <section class="exh-now" aria-label="開催中">
         <p class="exh-now__label">NOW ON VIEW</p>
@@ -134,10 +141,106 @@
         </div>
       </section>
     </div>
+      </div>
+
+      <div class="exh-lang" data-lang="en" lang="en" hidden>
+    <div class="exh-now-group">
+      <section class="exh-now" aria-label="Now on view">
+        <p class="exh-now__label">NOW ON VIEW</p>
+        <p class="exh-now__title">Seeing and Hearing Urushi</p>
+        <p class="exh-now__meta">Sep 12 – Dec 6, 2026 · Azumino Setsuro Takahashi Memorial Art Museum, Nagano, Japan</p>
+        <p class="exh-now__links"><a href="works/replay.html">Work page →</a>
+        <a href="http://azumino-bunka.com/news/setsuro/news3475/" target="_blank" rel="noopener">Exhibition ↗</a></p>
+      </section>
+      <section class="exh-now exh-now--upcoming" aria-label="Upcoming">
+        <p class="exh-now__label">UPCOMING</p>
+        <p class="exh-now__title">Kameyama Triennale 2027</p>
+        <p class="exh-now__meta">Oct 31 – Nov 20, 2027 · Kameyama, Mie, Japan</p>
+        <p class="exh-now__links"><a href="https://kameyamatriennale.com/gui-shantorien-nare-2027.html" target="_blank" rel="noopener">Exhibition ↗</a></p>
+      </section>
+    </div>
+
+    <section class="exh-section">
+      <h2 class="exh-section__title">Group Exhibitions</h2>
+
+      <div class="exh-row">
+        <span class="exh-row__date">Sep. 2026</span>
+        <div class="exh-row__body">
+          <span class="exh-row__name">Seeing and Hearing Urushi</span>
+          <span class="exh-row__venue">Azumino Setsuro Takahashi Memorial Art Museum, Azumino, Nagano, Japan</span>
+          <span class="exh-row__works"></span>
+        </div>
+      </div>
+
+      <div class="exh-row">
+        <span class="exh-row__date">Sep. 2025</span>
+        <div class="exh-row__body">
+          <span class="exh-row__name">Nagano City Arts Center Group Exhibition 2025</span>
+          <span class="exh-row__venue">Nagano City Arts Center, Nagano, Japan</span>
+          <span class="exh-row__works"></span>
+        </div>
+      </div>
+
+      <div class="exh-row">
+        <span class="exh-row__date">Jan. 2025</span>
+        <div class="exh-row__body">
+          <span class="exh-row__name">AKAP Winter Exhibition</span>
+          <span class="exh-row__venue">Hotaka Learning Center 'Mirai', Azumino, Nagano, Japan</span>
+          <span class="exh-row__works"></span>
+        </div>
+      </div>
+
+      <div class="exh-row">
+        <span class="exh-row__date">Sep. 2024</span>
+        <div class="exh-row__body">
+          <span class="exh-row__name">AKAP Summer Exhibition</span>
+          <span class="exh-row__venue">Azumino Municipal Setsuro Takahashi Memorial Art Museum, South Warehouse, Azumino, Nagano, Japan</span>
+          <span class="exh-row__works"></span>
+        </div>
+      </div>
+
+      <div class="exh-row">
+        <span class="exh-row__date">Jan. 2024</span>
+        <div class="exh-row__body">
+          <span class="exh-row__name">Azumino City x Kyoto University of Arts Collaborative Art Project</span>
+          <span class="exh-row__venue">Hotaka Learning Center 'Mirai', Azumino, Nagano, Japan</span>
+          <span class="exh-row__works"></span>
+        </div>
+      </div>
+
+      <div class="exh-row">
+        <span class="exh-row__date">Sep. 2023</span>
+        <div class="exh-row__body">
+          <span class="exh-row__name">Azumino City x Kyoto University of Arts Collaborative Art Project</span>
+          <span class="exh-row__venue">Hotaka Learning Center 'Mirai', Azumino, Nagano, Japan</span>
+          <span class="exh-row__works"></span>
+        </div>
+      </div>
+    </section>
+
+    <div class="exh-cols">
+      <section class="exh-col">
+        <h2 class="exh-section__title">Workshop</h2>
+        <div class="exh-mini">
+          <span class="exh-mini__date">Sep. 2023</span>
+          <span>Azumino City x Kyoto University of Arts Collaborative Art Project, Toyoshina Kita Junior High School, Azumino, Nagano, Japan</span>
+        </div>
+      </section>
+
+      <section class="exh-col">
+        <h2 class="exh-section__title">Award</h2>
+        <div class="exh-mini">
+          <span class="exh-mini__date">Feb. 2025</span>
+          <span>Kyoto University of Arts Graduate School Completion Exhibition, Excellence Award</span>
+        </div>
+      </section>
+    </div>
+      </div>
   </main>
   <footer class="site-footer">
     <span>© Shun Wakao</span>
   </footer>
 </div>
+<script src="js/lang.js"></script>
 </body>
 </html>

@@ -6,7 +6,7 @@
     var toggle = document.querySelector('[data-lang-toggle]');
     if (!toggle) return;
     var buttons = Array.prototype.slice.call(toggle.querySelectorAll('button[data-lang]'));
-    var panels = Array.prototype.slice.call(document.querySelectorAll('.about-lang'));
+    var panels = Array.prototype.slice.call(document.querySelectorAll('.about-lang, .exh-lang'));
 
     function set(lang) {
       panels.forEach(function (p) {
