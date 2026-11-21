@@ -1,0 +1,26 @@
+# --- 公開しない作業ファイル ---
+# 編集用の冊子PDF（大容量・非公開）
+202606_作品集_編集用.pdf
+*.pdf
+
+# 仕様書（音楽名義の運用に触れるため公開リポジトリには含めない）
+SPEC.md
+
+# 元画像（EXIF/GPS・機材情報を含むため公開しない。サイト表示は images/ を使用）
+originals/
+
+# 内部向けの手順書（公開する必要がないため）
+README.md
+
+# ローカルのアプリ設定（Claude Code / launch.json など）
+.claude/
+
+# 一時フォルダ
+_review/
+scratchpad/
+
+# OS / エディタ生成物
+.DS_Store
+Thumbs.db
+desktop.ini
+*~

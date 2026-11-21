@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>改訂案 トップ</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&amp;family=Noto+Serif+JP:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:#121211}
+a{color:#e8e6df;text-decoration:none}a:hover{color:#8fb3d9}
+</style>
+</helmet>
+<div style="width: 100%; min-height: 1000px; box-sizing: border-box; background: #121211; color: #e8e6df; font-family: 'Noto Sans JP', sans-serif; display: flex; flex-direction: column">
+<header style="max-width: 1200px; width: 100%; margin: 0 auto; box-sizing: border-box; padding: 40px 32px; display: flex; flex-wrap: wrap; gap: 16px 40px; justify-content: space-between; align-items: baseline">
+<a href="Top.dc.html" style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 16px">
+<span style="font-family: 'Noto Serif JP', serif; font-size: 20px; letter-spacing: 0.2em">若尾 俊</span>
+<span style="font-size: 12px; letter-spacing: 0.3em; color: #a3a29c">SHUN WAKAO</span>
+</a>
+<nav aria-label="メインメニュー" style="display: flex; flex-wrap: wrap; gap: 8px 32px; font-size: 13px; letter-spacing: 0.12em">
+<a href="Works.dc.html" style="padding: 12px 0">Works</a>
+<a href="#" style="padding: 12px 0">Exhibitions</a>
+<a href="#" style="padding: 12px 0">About</a>
+<a href="#" style="padding: 12px 0">Contact</a>
+</nav>
+</header>
+<main style="max-width: 1200px; width: 100%; margin: 0 auto; box-sizing: border-box; padding: 16px 32px 80px; flex-grow: 1; display: flex; flex-direction: column; gap: 20px">
+<div style="position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; background: #1d1d1b">
+<sc-for list="{{slides}}" as="s" hint-placeholder-count="1">
+<img src="{{s.img}}" alt="{{s.alt}}" style="{{s.style}}">
+</sc-for>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; align-items: center">
+<p style="margin: 0; font-size: 13px; color: #a3a29c; letter-spacing: 0.06em; line-height: 1.8"><span style="font-family: 'Noto Serif JP', serif; color: #e8e6df; font-size: 15px">{{current.title}}</span>　{{current.year}}　{{current.place}}</p>
+<div style="display: flex; gap: 4px">
+<sc-for list="{{slides}}" as="s" hint-placeholder-count="7">
+<button type="button" onClick="{{s.go}}" aria-label="{{s.label}}" style="width: 28px; height: 44px; padding: 0; border: 0; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center">
+<span style="{{s.dot}}"></span>
+</button>
+</sc-for>
+</div>
+</div>
+<sc-if value="{{showNow}}" hint-placeholder-val="{{true}}">
+<a href="ExhList.dc.html" style="margin-top: 28px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 28px; padding: 24px 0; border-top: 1px solid #33332f; border-bottom: 1px solid #33332f">
+<span style="font-size: 11px; letter-spacing: 0.3em; color: #8fb3d9">NOW ON VIEW</span>
+<span style="font-family: 'Noto Serif JP', serif; font-size: 18px; letter-spacing: 0.06em">[展覧会名]</span>
+<span style="font-size: 13px; color: #a3a29c; flex: 1 1 260px">[会期開始]〜2026年12月6日　[会場名]（安曇野市）</span>
+<span style="font-size: 12px; letter-spacing: 0.1em; color: #a3a29c">詳しく見る →</span>
+</a>
+</sc-if>
+</main>
+<footer style="max-width: 1200px; width: 100%; margin: 0 auto; box-sizing: border-box; padding: 32px; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px 24px; font-size: 12px; color: #a3a29c; letter-spacing: 0.1em">
+<span>© Shun Wakao</span>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"showNow":{"editor":"boolean","default":true,"section":"開催中の展示"},"seconds":{"editor":"int","default":6,"min":2,"max":20,"unit":"秒","section":"スライド"},"$preview":{"width":1280,"height":1150}}'>
+class Component extends DCLogic {
+componentDidMount() { this.startTimer(); }
+componentWillUnmount() { clearInterval(this.timer); }
+componentDidUpdate(prev) { if (prev.seconds !== this.props.seconds) this.startTimer(); }
+startTimer() {
+clearInterval(this.timer);
+const sec = Math.max(2, this.props.seconds ?? 6);
+this.timer = setInterval(() => {
+const i = (this.state && this.state.i) || 0;
+this.setState({ i: (i + 1) % 7 });
+}, sec * 1000);
+}
+renderVals() {
+const data = [
+{ title: '《水の囀り》', year: '2024', place: 'AKAP 夏展　安曇野市立高橋節郎記念美術館 南の蔵', img: '/_blob/594ca538177935dcd3652a72cb1c5f74', alt: '《水の囀り》木造の蔵に白い布をかけた展示台が置かれている' },
+{ title: '《飴と潮騒》', year: '2025', place: 'AKAP 冬展　安曇野市 穂高学習センター「みらい」', img: '/_blob/04e7827d96b294df18e0566f02f523d2', alt: '《飴と潮騒》塩飴のレコードが並ぶ黒い布と、壁に投影された海岸の映像' },
+{ title: '《祈りより出づ 〜火防と潮騒〜》', year: '2025', place: '長野市芸術館アート・グループ展 2025　長野市芸術館', img: '/_blob/09f160bc7ccafff1d3ed577bc12443c2', alt: '《祈りより出づ》蝋と塩のレコード盤が床に広がっている' },
+{ title: '《Snow Cradle》', year: '2024', place: '安曇野市×京都芸術大学連携アートプロジェクト　穂高学習センター「みらい」', img: '/_blob/3915aea9afe8ce906e291da4d41b7e3b', alt: '《Snow Cradle》白い綿のゆりかごの中央に黒いフェルトが置かれている' },
+{ title: '《川を診る》', year: '2024', place: '安曇野市 烏川渓谷緑地', img: '/_blob/b737f826ad68fa1f789af2b16075e31e', alt: '《川を診る》渓流にしゃがみ、聴診器で川の音を聞く作家' },
+{ title: '《風の花》', year: '2025', place: '長野市芸術館アート・グループ展 2025　長野市芸術館', img: '/_blob/61c8f697a5409cb4125f046fd4ffc913', alt: '《風の花》風車を模した木製の造形と鎌' },
+{ title: '《科学と芸術 〜生命の不思議もアートになる！〜》', year: '2023', place: '安曇野市×京都芸術大学連携アートプロジェクト　穂高学習センター「みらい」', img: '/_blob/7f05d496918512efd4c54aadff4d792c', alt: '《科学と芸術》ヨーグルトメーカーに収められた作品が並ぶ' }
+];
+const i = (this.state && this.state.i) || 0;
+const slides = data.map((d, k) => ({
+...d,
+label: d.title + ' を表示',
+style: 'position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 1.2s ease; opacity: ' + (k === i ? 1 : 0) + ';',
+dot: 'display: block; width: 6px; height: 6px; border-radius: 50%; background: ' + (k === i ? '#e8e6df' : '#5a5955') + ';',
+go: () => { this.setState({ i: k }); this.startTimer(); }
+}));
+return { slides, current: data[i], showNow: this.props.showNow ?? true };
+}
+}
+</script>
+</body>
+</html>

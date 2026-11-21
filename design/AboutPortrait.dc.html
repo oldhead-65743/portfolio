@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>About案2 ポートレート</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&amp;family=Noto+Serif+JP:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:#121211}
+a{color:#e8e6df;text-decoration:none}a:hover{color:#8fb3d9}
+</style>
+</helmet>
+<div style="width: 100%; min-height: 1900px; box-sizing: border-box; background: #121211; color: #e8e6df; font-family: 'Noto Sans JP', sans-serif; display: flex; flex-direction: column">
+<header style="max-width: 1200px; width: 100%; margin: 0 auto; box-sizing: border-box; padding: 40px 32px; display: flex; flex-wrap: wrap; gap: 16px 40px; justify-content: space-between; align-items: baseline">
+<a href="Top.dc.html" style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 16px">
+<span style="font-family: 'Noto Serif JP', serif; font-size: 20px; letter-spacing: 0.2em">若尾 俊</span>
+<span style="font-size: 12px; letter-spacing: 0.3em; color: #a3a29c">SHUN WAKAO</span>
+</a>
+<nav aria-label="メインメニュー" style="display: flex; flex-wrap: wrap; gap: 8px 32px; font-size: 13px; letter-spacing: 0.12em">
+<a href="Works.dc.html" style="padding: 12px 0">Works</a>
+<a href="ExhList.dc.html" style="padding: 12px 0">Exhibitions</a>
+<a href="#" aria-current="page" style="padding: 12px 0; color: #8fb3d9">About</a>
+<a href="#" style="padding: 12px 0">Contact</a>
+</nav>
+</header>
+<main style="max-width: 1200px; width: 100%; margin: 0 auto; box-sizing: border-box; padding: 24px 32px 80px; flex-grow: 1; display: flex; flex-wrap: wrap; gap: 48px 64px; align-items: flex-start">
+<aside style="flex: 1 1 220px; max-width: 280px; display: flex; flex-direction: column; gap: 20px">
+<img src="/_blob/4fce43d1d5280b833102b3bb5697c2ea" alt="若尾俊のポートレート" style="display: block; width: 100%; max-width: 220px; aspect-ratio: 330 / 385; object-fit: cover">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span style="font-family: 'Noto Serif JP', serif; font-size: 22px; letter-spacing: 0.16em">若尾 俊</span>
+<span style="font-size: 12px; letter-spacing: 0.3em; color: #a3a29c">SHUN WAKAO</span>
+</div>
+<div role="group" aria-label="表示言語" style="display: flex; gap: 0; border: 1px solid #33332f; width: max-content">
+<button type="button" onClick="{{toJa}}" aria-pressed="{{isJa}}" style="{{jaStyle}}">日本語</button>
+<button type="button" onClick="{{toEn}}" aria-pressed="{{isEn}}" style="{{enStyle}}">English</button>
+</div>
+</aside>
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 56px">
+<section style="display: flex; flex-direction: column; gap: 18px; font-size: 15px; line-height: 2.05; letter-spacing: 0.03em">
+<sc-for list="{{t.bio}}" as="p" hint-placeholder-count="5">
+<p style="margin: 0">{{p.text}}</p>
+</sc-for>
+</section>
+<section aria-label="略歴" style="display: flex; flex-direction: column; gap: 32px">
+<sc-for list="{{t.cv}}" as="g" hint-placeholder-count="4">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; font-size: 12px; font-weight: 400; letter-spacing: 0.2em; color: #a3a29c">{{g.head}}</h2>
+<div style="display: grid; grid-template-columns: 6em minmax(0, 1fr); gap: 8px 24px; font-size: 13px; line-height: 1.8; border-top: 1px solid #33332f; padding-top: 14px">
+<sc-for list="{{g.rows}}" as="r" hint-placeholder-count="3">
+<span style="color: #a3a29c">{{r.d}}</span><span>{{r.t}}</span>
+</sc-for>
+</div>
+</div>
+</sc-for>
+<a href="ExhList.dc.html" style="font-size: 13px; color: #8fb3d9; padding: 12px 0; width: max-content">{{t.exhLink}}</a>
+</section>
+</div>
+</main>
+<footer style="max-width: 1200px; width: 100%; margin: 0 auto; box-sizing: border-box; padding: 32px; display: flex; justify-content: flex-end; font-size: 12px; color: #a3a29c; letter-spacing: 0.1em">
+<span>© Shun Wakao</span>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1900}}'>
+class Component extends DCLogic {
+renderVals() {
+const ja = {
+bio: [
+{ text: '　1992年、東京生まれ。薬学の学位を持つ薬剤師であり、現在は医療機器の研究開発に携わるかたわら、インスタレーションを制作するアーティストとして活動している。主な活動拠点は長野県の安曇野。2025年3月に京都芸術大学大学院を修了し、修士号を取得。大学院ではアートプロジェクトに関する実践研究に取り組んだ。京都芸術大学の修了制作展では優秀賞を受賞した。' },
+{ text: '　幼い頃から漫画、テレビゲーム、小説に囲まれて育ち、とりわけSFのような、人間と非人間との関係を描いたノンフィクションの物語を好んだ。父が山梨県の豊かな自然に囲まれた地域の出身であったため、都市と自然とを行き来しながら多くの時間を過ごした。都市の利便性と自然の豊かさを同時に享受したこの経験が、デジタルとアナログ、人工と自然という相反する要素を均衡させる感性を育んだ。' },
+{ text: '　大学で薬学を学んでいた頃、自然科学的な技術がアートへと変換されていることを知り、アートに関心を抱くようになった。しかし、そうしたアーティストたちのアートが、技術の単なる紹介や技術への批評にとどまっている点に疑問を覚えた。このことから、自らの専門性を用いて、かつて親しんだ物語を表現できないかと考えるようになった。そして京都芸術大学の保科豊巳教授に師事し、自身の専門性と地域の自然・素材を活かしたインスタレーションの制作を始めた。' },
+{ text: '　彼の専門性、関心、そして出自は、その作品のコンセプトに大きな影響を与えている。作品のテーマは「自然×科学×身体」。自然科学的な原理や物理的な作用についての専門性を用いて、自然との関係を構築する。こうして、自身と地域の自然との関係を、素材や現象という形で現出させる。これを通じて、地域・自然・自身の関係のなかにある生命力を見いだし、地域の自然と自身との関係を築き、強めようと試みている。' },
+{ text: '　音楽を愛する家族に囲まれて育ち、幼い頃からピアノとホルンを演奏してきた。その影響もあってか、作品には音の要素が表れている。' }
+],
+cv: [
+{ head: '学歴・職歴', rows: [{ d: '2017.03', t: '北里大学 薬学部 卒業　薬剤師免許、臨床検査技師免許 取得' }, { d: '2017.04', t: '医療機器メーカー 研究開発職（現職）' }, { d: '2025.03', t: '京都芸術大学大学院 修士課程 芸術環境専攻 保科ラボ 修了' }] }
+],
+exhLink: '展示歴・受賞歴は Exhibitions へ →'
+};
+const en = {
+bio: [
+{ text: 'Born in 1992 in Tokyo, Japan. He is a pharmacist with a degree in pharmacy and currently works as an artist creating installations while engaging in the research and development of medical devices. His main area of activity is Azumino in Nagano Prefecture. He graduated from Kyoto University of Arts in March 2025 with a master’s degree. He was doing practical research on art projects in his master’s program. He won the excellence award at the graduation exhibition of Kyoto University of Arts.' },
+{ text: 'He grew up surrounded by manga, video games, and novels from an early age and particularly enjoyed non-fiction stories, such as science fiction, that depicted human versus non-human relationships. His father came from a rich natural environment in Yamanashi Prefecture, so he spent much of his time moving back and forth between the city and nature. This experience of simultaneously enjoying the conveniences of the city and the riches of nature nurtured his sensitivity to balance the contradictory elements of digital and analog, artificial and natural.' },
+{ text: 'While he was studying pharmacy at university, he became interested in art when he learned that natural scientific techniques were being converted into art. However, he questioned the fact that art by these artists was merely an introduction to technology or a criticism of technology. This led him to consider whether he could use his expertise to express the stories he was once familiar with. He then studied under Professor Toyomi Hoshina of Kyoto University of Arts and began creating installations utilizing his expertise and the nature and materials of the region.' },
+{ text: 'His expertise, interests, and origins have greatly influenced the concept of his work. The theme of his work is “nature x science x body”. He uses his expertise in natural scientific principles and physical actions to construct his relationship with nature. In this way, he manifests the relationship between himself and local nature in the form of materials and phenomena. Through this manifestation, he discovers the vitality in the relationship between the region, nature, and himself. Through this process, he attempts to build and strengthen the relationship between the local nature and himself.' },
+{ text: 'He is surrounded by a family that loves music, and he has played the piano and horn since he was a child. Perhaps influenced by this, the element of sound is visible in his work.' }
+],
+cv: [
+{ head: 'EDUCATION / CAREER', rows: [{ d: 'Mar. 2017', t: 'Graduated from Kitasato University of Pharmaceutical Sciences. Licensed pharmacist and clinical laboratory technician' }, { d: 'Apr. 2017', t: 'Medical device manufacturer, Research and Development Division (current position)' }, { d: 'Mar. 2023', t: 'Graduated from Kyoto University of Arts, Correspondence Course, Art Studies Course' }, { d: 'Mar. 2025', t: 'Graduated from Kyoto University of Arts, Master Course, Art Environment, Toyomi Hoshina Lab.' }] }
+],
+exhLink: 'Exhibitions and awards →'
+};
+const lang = (this.state && this.state.lang) || 'ja';
+const on = 'min-height: 44px; padding: 0 16px; border: 0; cursor: pointer; font: inherit; font-size: 12px; letter-spacing: 0.1em; background: #e8e6df; color: #121211;';
+const off = 'min-height: 44px; padding: 0 16px; border: 0; cursor: pointer; font: inherit; font-size: 12px; letter-spacing: 0.1em; background: transparent; color: #a3a29c;';
+return {
+t: lang === 'ja' ? ja : en,
+isJa: lang === 'ja' ? 'true' : 'false',
+isEn: lang === 'en' ? 'true' : 'false',
+jaStyle: lang === 'ja' ? on : off,
+enStyle: lang === 'en' ? on : off,
+toJa: () => this.setState({ lang: 'ja' }),
+toEn: () => this.setState({ lang: 'en' })
+};
+}
+}
+</script>
+</body>
+</html>

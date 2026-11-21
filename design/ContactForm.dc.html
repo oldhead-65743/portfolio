@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>Contact案2 フォーム</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&amp;family=Noto+Serif+JP:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:#121211}
+a{color:#e8e6df;text-decoration:none}a:hover{color:#8fb3d9}
+</style>
+</helmet>
+<div style="width: 100%; min-height: 1250px; box-sizing: border-box; background: #121211; color: #e8e6df; font-family: 'Noto Sans JP', sans-serif; display: flex; flex-direction: column">
+<header style="max-width: 1200px; width: 100%; margin: 0 auto; box-sizing: border-box; padding: 40px 32px; display: flex; flex-wrap: wrap; gap: 16px 40px; justify-content: space-between; align-items: baseline">
+<a href="Top.dc.html" style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 16px">
+<span style="font-family: 'Noto Serif JP', serif; font-size: 20px; letter-spacing: 0.2em">若尾 俊</span>
+<span style="font-size: 12px; letter-spacing: 0.3em; color: #a3a29c">SHUN WAKAO</span>
+</a>
+<nav aria-label="メインメニュー" style="display: flex; flex-wrap: wrap; gap: 8px 32px; font-size: 13px; letter-spacing: 0.12em">
+<a href="Works.dc.html" style="padding: 12px 0">Works</a>
+<a href="ExhList.dc.html" style="padding: 12px 0">Exhibitions</a>
+<a href="AboutPortrait.dc.html" style="padding: 12px 0">About</a>
+<a href="#" aria-current="page" style="padding: 12px 0; color: #8fb3d9">Contact</a>
+</nav>
+</header>
+<main style="max-width: 720px; width: 100%; margin: 0 auto; box-sizing: border-box; padding: 24px 32px 80px; flex-grow: 1; display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; flex-direction: column; gap: 16px">
+<h1 style="margin: 0; font-family: 'Noto Serif JP', serif; font-weight: 400; font-size: 24px; letter-spacing: 0.2em">Contact</h1>
+<p style="margin: 0; font-size: 14px; line-height: 2; color: #c9c7bf">展示・制作のご依頼、取材などのお問い合わせは、以下のフォームからお送りください。</p>
+</div>
+<form style="display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="c-name" style="font-size: 12px; letter-spacing: 0.1em; color: #a3a29c">お名前 Name</label>
+<input id="c-name" type="text" style="min-height: 48px; padding: 0 14px; background: #1b1b19; border: 1px solid #3a3a36; color: #e8e6df; font: inherit; font-size: 15px">
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="c-mail" style="font-size: 12px; letter-spacing: 0.1em; color: #a3a29c">メールアドレス Email</label>
+<input id="c-mail" type="email" style="min-height: 48px; padding: 0 14px; background: #1b1b19; border: 1px solid #3a3a36; color: #e8e6df; font: inherit; font-size: 15px">
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="c-body" style="font-size: 12px; letter-spacing: 0.1em; color: #a3a29c">内容 Message</label>
+<textarea id="c-body" rows="8" style="padding: 14px; background: #1b1b19; border: 1px solid #3a3a36; color: #e8e6df; font: inherit; font-size: 15px; line-height: 1.8; resize: vertical"></textarea>
+</div>
+<button type="button" style="align-self: flex-start; min-height: 48px; padding: 0 40px; background: #e8e6df; color: #121211; border: 0; font: inherit; font-size: 14px; letter-spacing: 0.2em; cursor: pointer">送信する</button>
+</form>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; font-size: 13px; border-top: 1px solid #33332f; padding-top: 24px; color: #a3a29c">
+<span style="font-size: 12px; letter-spacing: 0.1em">Instagram</span>
+<a href="#" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: #e8e6df"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"></circle></svg>[@アカウント名]</a>
+</div>
+</main>
+<footer style="max-width: 1200px; width: 100%; margin: 0 auto; box-sizing: border-box; padding: 32px; display: flex; justify-content: flex-end; font-size: 12px; color: #a3a29c; letter-spacing: 0.1em">
+<span>© Shun Wakao</span>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1250}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>作品ページ案3 ビューア</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&amp;family=Noto+Serif+JP:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:#121211}
+a{color:#e8e6df;text-decoration:none}a:hover{color:#8fb3d9}
+</style>
+</helmet>
+<div style="width: 100%; min-height: 2300px; box-sizing: border-box; background: #121211; color: #e8e6df; font-family: 'Noto Sans JP', sans-serif; display: flex; flex-direction: column">
+<header style="max-width: 1200px; width: 100%; margin: 0 auto; box-sizing: border-box; padding: 40px 32px; display: flex; flex-wrap: wrap; gap: 16px 40px; justify-content: space-between; align-items: baseline">
+<a href="Top.dc.html" style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 16px">
+<span style="font-family: 'Noto Serif JP', serif; font-size: 20px; letter-spacing: 0.2em">若尾 俊</span>
+<span style="font-size: 12px; letter-spacing: 0.3em; color: #a3a29c">SHUN WAKAO</span>
+</a>
+<nav aria-label="メインメニュー" style="display: flex; flex-wrap: wrap; gap: 8px 32px; font-size: 13px; letter-spacing: 0.12em">
+<a href="Works.dc.html" style="padding: 12px 0; color: #8fb3d9">Works</a>
+<a href="#" style="padding: 12px 0">Exhibitions</a>
+<a href="#" style="padding: 12px 0">About</a>
+<a href="#" style="padding: 12px 0">Contact</a>
+</nav>
+</header>
+<main style="max-width: 1200px; width: 100%; margin: 0 auto; box-sizing: border-box; padding: 16px 32px 80px; display: flex; flex-direction: column; gap: 56px">
+<section aria-label="写真" style="display: flex; flex-direction: column; gap: 16px">
+<div style="position: relative; width: 100%; aspect-ratio: 3 / 2; background: #0b0b0a">
+<img src="{{cur.img}}" alt="{{cur.alt}}" style="display: block; width: 100%; height: 100%; object-fit: contain">
+<button type="button" onClick="{{prev}}" aria-label="前の写真" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border: 0; border-radius: 50%; background: rgba(18,18,17,0.6); color: #e8e6df; cursor: pointer; display: flex; align-items: center; justify-content: center">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg>
+</button>
+<button type="button" onClick="{{next}}" aria-label="次の写真" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border: 0; border-radius: 50%; background: rgba(18,18,17,0.6); color: #e8e6df; cursor: pointer; display: flex; align-items: center; justify-content: center">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg>
+</button>
+</div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; font-size: 12px; color: #a3a29c; line-height: 1.8">
+<p style="margin: 0; flex: 1 1 400px">{{cur.caption}}</p>
+<p style="margin: 0; font-variant-numeric: tabular-nums">{{counter}}</p>
+</div>
+<div style="display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px">
+<sc-for list="{{thumbs}}" as="t" hint-placeholder-count="7">
+<button type="button" onClick="{{t.go}}" aria-label="{{t.label}}" style="{{t.style}}">
+<img src="{{t.img}}" alt="" style="display: block; width: 100%; height: 100%; object-fit: cover">
+</button>
+</sc-for>
+</div>
+</section>
+<section style="display: flex; flex-wrap: wrap; gap: 24px 48px; align-items: flex-end; border-bottom: 1px solid #33332f; padding-bottom: 28px">
+<div style="flex: 1 1 300px; display: flex; flex-direction: column; gap: 8px">
+<h1 style="margin: 0; font-family: 'Noto Serif JP', serif; font-weight: 400; font-size: 32px; letter-spacing: 0.12em">水の囀り</h1>
+<p style="margin: 0; font-size: 13px; color: #a3a29c; letter-spacing: 0.1em">2024</p>
+</div>
+<dl style="flex: 2 1 480px; margin: 0; display: grid; grid-template-columns: 4.5em minmax(0, 1fr); gap: 8px 16px; font-size: 12px; line-height: 1.8">
+<dt style="color: #a3a29c">展示</dt><dd style="margin: 0">AKAP 夏展（2024年9月23日〜10月1日）　安曇野市立高橋節郎記念美術館 敷地内　南の蔵</dd>
+<dt style="color: #a3a29c">サイズ</dt><dd style="margin: 0">可変　／　映像 ① 3分17秒　② 1分31秒</dd>
+<dt style="color: #a3a29c">素材</dt><dd style="margin: 0">ワイン、ぶどう、聴診器、釣り竿、PLA、ベニヤ板、布、Raspberry Pi Pico、プロジェクター</dd>
+</dl>
+</section>
+<section style="display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 16px; font-size: 14px; line-height: 2.1; letter-spacing: 0.04em">
+<p style="margin: 0">　本作品は、安曇野の水と作物（ワイン、ぶどう）を用いて抽出した酒石酸結晶と、安曇野の川の中で採取した音で構成されている。安曇野の川の中の音はピエゾ効果によって結晶を振動させることにより、結晶を通して再生されている。また、その音は聴診器を用い、釣り竿や身体と合わせることで、川から生命を感じられるような方法で録音している。安曇野の水で育まれた作物、生命を取り扱うように採取した水の音、これらを媒介し、川や水と生命を関連付けた。</p>
+<p style="margin: 0">　蔵の1階にはぶどう傘に包まれた結晶が2点配置されており、2階には川の音を録音している映像2点と用いた道具が配置されている。それぞれの映像で用いた道具と結晶が聴診器を介して繋がっており、映像に対応した音が結晶から流れている。</p>
+<p style="margin: 0">　結晶に被せられたぶどう傘に耳を澄ませると、そこから微かな音と何者かの気配を感じることができる。それはまさしく水そのものの生命の存在を知らせる、水の囀りではないだろうか。</p>
+</div>
+<div lang="en" style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 14px; font-size: 13px; line-height: 1.9; color: #c9c7bf">
+<p style="margin: 0">This work is composed of crystals extracted using water and crops (wine and grapes) from Azumino and sounds collected in a river in Azumino. The sounds in the Azumino river are played through the crystals by making them vibrate. The sounds are also collected using a stethoscope in such a way that I can feel the life from the river and the water through myself. Crops grown in the water of Azumino, and sounds collected in a way to treat life, these are the medium that links the river, water, and life.</p>
+<p style="margin: 0">On the first floor of the warehouse, two grape umbrellas and crystals wrapped in cotton are placed, and on the second floor, two images of the collection of river sounds and the tools used are placed. The tools used in each video and the crystals are connected via a stethoscope, and sounds corresponding to the video are played from the crystals.</p>
+<p style="margin: 0">If you listen carefully to the crystals covered with the grape umbrella, you can feel faint sounds and the presence of someone. It is indeed the tweeting of water that signals the presence of life in water itself.</p>
+</div>
+</section>
+<section aria-label="映像" style="display: flex; flex-wrap: wrap; gap: 32px">
+<figure style="margin: 0; flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 10px">
+<div style="position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; background: #1d1d1b">
+<img src="/_blob/e972fbcf28c0e2fe99f79d25376e85da" alt="映像①の一場面。釣り竿に括り付けた聴診器で録音する作家" style="display: block; width: 100%; height: 100%; object-fit: cover; opacity: 0.7">
+<span style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; letter-spacing: 0.2em; background: rgba(18,18,17,0.35)">映像埋め込み予定</span>
+</div>
+<figcaption style="font-size: 12px; color: #a3a29c; line-height: 1.8">映像①（3分17秒）</figcaption>
+</figure>
+<figure style="margin: 0; flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 10px">
+<div style="position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; background: #1d1d1b">
+<img src="/_blob/7afb975d4e57c882c4d4ce34c37360ec" alt="映像②の一場面。川の中で聴診器を体に括り付けて録音する作家" style="display: block; width: 100%; height: 100%; object-fit: cover; opacity: 0.7">
+<span style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; letter-spacing: 0.2em; background: rgba(18,18,17,0.35)">映像埋め込み予定</span>
+</div>
+<figcaption style="font-size: 12px; color: #a3a29c; line-height: 1.8">映像②（1分31秒）</figcaption>
+</figure>
+</section>
+<nav aria-label="前後の作品" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; border-top: 1px solid #33332f; padding-top: 32px; font-size: 13px; letter-spacing: 0.06em">
+<a href="#" style="padding: 12px 0">← 《川を診る》</a>
+<a href="Works.dc.html" style="padding: 12px 0; color: #a3a29c">作品一覧</a>
+<a href="#" style="padding: 12px 0">《飴と潮騒》 →</a>
+</nav>
+</main>
+<footer style="max-width: 1200px; width: 100%; margin: 0 auto; box-sizing: border-box; padding: 32px; display: flex; justify-content: flex-end; font-size: 12px; color: #a3a29c; letter-spacing: 0.1em">
+<span>© Shun Wakao</span>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":2300}}'>
+class Component extends DCLogic {
+renderVals() {
+const photos = [
+{ img: '/_blob/594ca538177935dcd3652a72cb1c5f74', alt: '南の蔵1階の展示風景', caption: '南の蔵1階。ぶどう傘に包まれた結晶が2点、展示台の上に置かれている。' },
+{ img: '/_blob/a45deca7920dcbff96baf8baa010dbcd', alt: '南の蔵2階。手すりに釣り竿と聴診器が掛けられている', caption: '南の蔵2階。手すりに掛けた釣り竿から、1階の展示台へ聴診器を垂らしている。' },
+{ img: '/_blob/fd9ed8eb533971981e6f0f99551b26fa', alt: 'ぶどう傘に包まれた結晶と聴診器', caption: 'ぶどう傘に包まれた結晶と聴診器。自作のMP3プレイヤーから音声信号を送り、結晶を振動させて川の中の音を再生する。' },
+{ img: '/_blob/f9a433d27b6ffc83261e1d14feb4427f', alt: '南の蔵1階の展示風景', caption: '南の蔵1階の展示風景。' },
+{ img: '/_blob/78ce7ad3347f8ff4318a8f6bfe848d05', alt: '2階の奥でプロジェクターが川の映像を投影している', caption: '南の蔵2階の奥。プロジェクターで川の音を録音する映像を再生している。' },
+{ img: '/_blob/e972fbcf28c0e2fe99f79d25376e85da', alt: '川辺の岩に座り、釣り竿に括り付けた聴診器で録音する作家', caption: '烏川渓谷緑地の川で、釣り竿に括り付けた聴診器で川の中の音を録音する（映像①）。' },
+{ img: '/_blob/7afb975d4e57c882c4d4ce34c37360ec', alt: '川の中で聴診器を体に括り付けて録音する作家', caption: '聴診器を体に括り付け、川の中の音を録音する（映像②）。' }
+];
+const n = photos.length;
+const i = (this.state && this.state.i) || 0;
+const thumbs = photos.map((p, k) => ({
+img: p.img,
+label: (k + 1) + '枚目の写真を表示',
+style: 'flex: 0 0 auto; width: 96px; height: 64px; padding: 0; border: 0; cursor: pointer; background: #1d1d1b; outline: ' + (k === i ? '2px solid #e8e6df' : 'none') + '; outline-offset: 2px; opacity: ' + (k === i ? 1 : 0.55) + ';',
+go: () => this.setState({ i: k })
+}));
+return {
+cur: photos[i],
+counter: (i + 1) + ' / ' + n,
+thumbs,
+prev: () => this.setState({ i: (i - 1 + n) % n }),
+next: () => this.setState({ i: (i + 1) % n })
+};
+}
+}
+</script>
+</body>
+</html>
