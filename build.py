@@ -7,6 +7,7 @@ originals/<ID>/ の画像を images/<ID>/ に縮小（ffmpeg）して、全HTML 
 import os, re, json, glob, subprocess, datetime, tomllib
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
+OUT = os.path.join(ROOT, 'docs')   # 配信ファイルの出力先（GitHub Pages: main/docs）
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
          '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?'
@@ -53,7 +54,7 @@ def build_images(site, works):
     n = 0
     for w in works.values():
         src_dir = os.path.join(ROOT, 'originals', w['id'])
-        dst_dir = os.path.join(ROOT, 'images', w['id'])
+        dst_dir = os.path.join(OUT, 'images', w['id'])
         os.makedirs(dst_dir, exist_ok=True)
         for src in sorted(glob.glob(os.path.join(src_dir, '*.jpg'))):
             dst = os.path.join(dst_dir, os.path.basename(src))
@@ -543,7 +544,7 @@ def page_contact(site):
     return '\n'.join([h, header(site, 'contact', pfx), main, footer(site), '</body>', '</html>', ''])
 
 def write(path, content):
-    full = os.path.join(ROOT, path)
+    full = os.path.join(OUT, path)
     os.makedirs(os.path.dirname(full), exist_ok=True)
     open(full, 'w', encoding='utf-8').write(content)
 
