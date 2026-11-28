@@ -56,6 +56,10 @@ def build_images(site, works):
         src_dir = os.path.join(ROOT, 'originals', w['id'])
         dst_dir = os.path.join(OUT, 'images', w['id'])
         os.makedirs(dst_dir, exist_ok=True)
+        wanted = {os.path.basename(s) for s in glob.glob(os.path.join(src_dir, '*.jpg'))}
+        for old in glob.glob(os.path.join(dst_dir, '*.jpg')):  # リネーム等で不要になった旧画像を掃除
+            if os.path.basename(old) not in wanted:
+                os.remove(old)
         for src in sorted(glob.glob(os.path.join(src_dir, '*.jpg'))):
             dst = os.path.join(dst_dir, os.path.basename(src))
             subprocess.run(['ffmpeg', '-y', '-v', 'error', '-i', src, '-vf', vf,
