@@ -1,5 +1,6 @@
 # サイト全体設定。base_url を本番URLに変えて再ビルドすれば OGP/canonical/sitemap が確定します。
 base_url = "https://oldhead-65743.github.io/portfolio"
+google_verification = "brUbLHGwwq5DJDjAAkZYOG1Z2SY_Su3hBTD4HuJQnXY"  # Google Search Console 所有権確認
 site_name = "若尾 俊 SHUN WAKAO"
 artist_ja = "若尾 俊"
 artist_en = "SHUN WAKAO"

@@ -74,6 +74,9 @@ def head(site, title, desc, path, ogtype, img_rel, jsonld, pfx):
            '<meta name="viewport" content="width=device-width, initial-scale=1">',
            '<title>%s</title>' % T(title), FONTS,
            '<meta name="description" content="%s">' % A(desc)]
+    if site.get('google_verification'):
+        out.append('<meta name="google-site-verification" content="%s">'
+                   % A(site['google_verification']))
     for obj in jsonld:
         out.append('<script type="application/ld+json">\n%s\n</script>'
                    % json.dumps(obj, ensure_ascii=False))
