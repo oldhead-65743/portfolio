@@ -139,7 +139,7 @@ def _banner(cfg, modifier=''):
                          T(cfg['meta']), T(cfg['more'])))
 
 def now_group(site):
-    parts = [_banner(site.get('now_on_view', {})),
+    parts = [_banner(resolve_now(site) or {}),
              _banner(site.get('upcoming', {}), 'now-on-view--upcoming')]
     parts = [p for p in parts if p]
     if not parts:
@@ -153,6 +153,68 @@ def ym_ja(s):
         return '%s年%d月' % (y, int(m))
     except Exception:
         return s
+
+MONTHS_EN = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+             'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+def period_en(full):
+    """'2026年9月12日〜2026年12月6日' -> 'Sep 12 – Dec 6, 2026'。"""
+    m = re.match(r'(\d+)年(\d+)月(\d+)日〜(\d+)年(\d+)月(\d+)日', str(full))
+    if not m:
+        return str(full)
+    y1, mo1, d1, y2, mo2, d2 = map(int, m.groups())
+    end = str(d2) if mo1 == mo2 else '%s %d' % (MONTHS_EN[mo2], d2)
+    return '%s %d – %s, %d' % (MONTHS_EN[mo1], d1, end, y2)
+
+def place_from_venue(venue):
+    """'会場（県）' -> '県　会場'（作品の『場所』表記を会場から導出）。"""
+    m = re.match(r'^(.*?)（([^（）]+)）\s*$', str(venue))
+    if m:
+        return '%s　%s' % (m.group(2).strip(), m.group(1).strip())
+    return str(venue)
+
+def exhibition_by_date(site, date):
+    for e in site.get('exhibitions', []):
+        if e.get('date') == date:
+            return e
+    return None
+
+def exhibition_of_work(site, slug):
+    for e in site.get('exhibitions', []):
+        if slug in (e.get('works') or []):
+            return e
+    return None
+
+def work_info(site, w):
+    """作品の情報行。出展したグループ展があれば 展示・場所 を先頭に導出して付ける。"""
+    rows = []
+    e = exhibition_of_work(site, w.get('slug'))
+    if e:
+        rows.append(['展示', '%s（%s）' % (e.get('name', ''), e.get('period', ''))])
+        rows.append(['場所', place_from_venue(e.get('venue', ''))])
+    rows += [list(r) for r in w.get('info', [])
+             if len(r) >= 1 and r[0] not in ('展示', '場所')]
+    return rows
+
+def resolve_now(site):
+    """now_on_view が参照するグループ展から、表示用の cfg を組み立てる。"""
+    nv = site.get('now_on_view', {})
+    if not nv.get('enabled'):
+        return None
+    e = exhibition_by_date(site, nv.get('exhibition'))
+    if not e:
+        return None
+    slug = (e.get('works') or [None])[0]
+    return {
+        'enabled': True, 'label': 'NOW ON VIEW',
+        'title': e.get('name', ''), 'title_en': e.get('name_en', e.get('name', '')),
+        'meta': '%s　%s' % (e.get('period', ''), e.get('venue', '')),
+        'meta_en': '%s · %s' % (period_en(e.get('period', '')), e.get('venue_en', '')),
+        'work_link': ('works/%s.html' % slug) if slug else '',
+        'event_url': e.get('event_url', ''),
+        'link': nv.get('link', 'exhibitions.html'),
+        'more': nv.get('more', '詳しく見る →'),
+    }
 
 def _exh_box(cfg, modifier='', lang='ja'):
     if not cfg.get('enabled'):
@@ -185,7 +247,7 @@ def _exh_box(cfg, modifier='', lang='ja'):
                                   T(meta), links_html))
 
 def exh_now_group(site, lang='ja'):
-    parts = [_exh_box(site.get('now_on_view', {}), '', lang),
+    parts = [_exh_box(resolve_now(site) or {}, '', lang),
              _exh_box(site.get('upcoming', {}), 'exh-now--upcoming', lang)]
     parts = [p for p in parts if p]
     if not parts:
@@ -283,7 +345,8 @@ def page_work(site, works, w):
                       '<img src="../images/%s/%s" alt="%s"></button>'
                       % (w['id'], ph['file'], A(ph['alt']), A(ph['caption']), i,
                          w['id'], ph['file'], A(ph['alt'])))
-    info = '\n'.join('        <dt>%s</dt><dd>%s</dd>' % (T(k), T(v)) for k, v in w['info'])
+    info = '\n'.join('        <dt>%s</dt><dd>%s</dd>' % (T(k), T(v))
+                     for k, v in work_info(site, w))
     ja = '\n'.join('        <p>　%s</p>' % T(p) for p in w['st_ja'])
     en = '\n'.join('        <p>%s</p>' % T(p) for p in w['st_en'])
     videos = ''
@@ -376,7 +439,8 @@ def page_exhibitions(site, works):
                 d, name = date_en(e['date']), e.get('name_en', e['name'])
                 venue, links = e.get('venue_en', e['venue']), ''
             else:
-                d, name, venue = ym_ja(e['date']), e['name'], e['venue']
+                d, name = ym_ja(e['date']), e['name']
+                venue = e['venue'] + '　' + e.get('period', '')
                 links = '　'.join(wlink(s) for s in e['works'])
             out.append('      <div class="exh-row">\n'
                        '        <span class="exh-row__date">%s</span>\n'
