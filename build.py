@@ -117,9 +117,26 @@ def footer(site):
             '</div>' % T(site['copyright']))
 
 def person(site, desc=None):
-    p = {"@type": "Person", "name": site['artist_ja'],
-         "alternateName": site['artist_en'], "jobTitle": "美術作家",
-         "sameAs": [site['instagram_url']]}
+    base = site['base_url'].rstrip('/')
+    ab = site.get('about', {})
+    p = {
+        "@type": "Person",
+        "name": site['artist_ja'],
+        # 検索語の揺れ（スペース有無・読み・英名）を網羅して同一人物として認識されやすくする
+        "alternateName": [site['artist_en'], "若尾俊", "わかお しゅん", "Shun Wakao"],
+        "jobTitle": ["美術作家", "アーティスト"],
+        "url": base + '/',
+        "nationality": {"@type": "Country", "name": "日本"},
+        "workLocation": {"@type": "Place", "name": "長野県安曇野"},
+        "knowsAbout": ["インスタレーション", "現代美術", "サイアノタイプ",
+                       "自然科学", "アートプロジェクト"],
+        "alumniOf": [{"@type": "CollegeOrUniversity", "name": "京都芸術大学大学院"},
+                     {"@type": "CollegeOrUniversity", "name": "北里大学"}],
+        "sameAs": [site['instagram_url']],
+    }
+    bp = ab.get('birthplace')
+    if bp:
+        p["birthPlace"] = {"@type": "Place", "name": re.sub(r'^\d+年', '', bp)}
     if desc:
         p["description"] = desc
     return p
@@ -272,8 +289,11 @@ def exh_now_group(site, lang='ja'):
 # ---------- pages ----------
 def page_index(site, works):
     pfx = ''
+    base = site['base_url'].rstrip('/')
     jsonld = [{"@context": "https://schema.org", "@type": "WebSite",
-               "name": site['site_name'], "inLanguage": "ja"},
+               "name": site['site_name'], "url": base + '/', "inLanguage": "ja",
+               "about": {"@type": "Person", "name": site['artist_ja'],
+                         "alternateName": site['artist_en']}},
               dict({"@context": "https://schema.org"}, **person(site, PERSON_DESC))]
     desc = ("美術作家 若尾 俊（SHUN WAKAO）のポートフォリオ。長野県安曇野を拠点に、"
             "自然×科学×身体をテーマとしたインスタレーションを制作。代表作《水の囀り》《飴と潮騒》ほか。")
@@ -523,7 +543,8 @@ def page_about(site):
     about_desc = ("1992年東京生まれ。薬学の学位を持つ薬剤師であり、医療機器の研究開発に携わる"
                   "かたわら、長野県安曇野を拠点にインスタレーションを制作する美術作家。"
                   "2025年3月に京都芸術大学大学院を修了。")
-    jsonld = [dict({"@context": "https://schema.org"}, **person(site, about_desc))]
+    jsonld = [{"@context": "https://schema.org", "@type": "ProfilePage",
+               "mainEntity": person(site, about_desc)}]
     def lang_block(lang, bio, cv, head_label, link_label, hidden):
         bios = '\n'.join('          <p>%s%s</p>' % ('　' if lang == 'ja' else '', T(p)) for p in bio)
         rows = '\n'.join('              <span class="about-cv__d">%s</span><span>%s</span>'
