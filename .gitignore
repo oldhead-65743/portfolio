@@ -12,12 +12,28 @@ originals/
 # 内部向けの手順書（公開する必要がないため）
 README.md
 
+# InDesign ラベル流し込み用の書き出し（ローカル作業用）
+export/
+
+# ローカル管理アプリ（公開しない）
+admin.py
+*.bat
+
+# InDesign ラベル流し込み用のローカルツール（公開しない）
+build_export.py
+fill_indesign.jsx
+*.lnk
+
 # ローカルのアプリ設定（Claude Code / launch.json など）
 .claude/
 
 # 一時フォルダ
 _review/
 scratchpad/
+
+# Python キャッシュ
+__pycache__/
+*.pyc
 
 # OS / エディタ生成物
 .DS_Store

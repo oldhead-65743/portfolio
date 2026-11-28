@@ -301,7 +301,7 @@ def page_index(site, works):
     desc = ("美術作家 若尾 俊（SHUN WAKAO）のポートフォリオ。長野県安曇野を拠点に、"
             "自然×科学×身体をテーマとしたインスタレーションを制作。代表作《水の囀り》《飴と潮騒》ほか。")
     h = head(site, site['site_name'], desc, '', 'website', '/images/04-mizu/1.jpg', jsonld, pfx)
-    slides = site['slideshow']
+    slides = [sl for sl in site['slideshow'] if sl.get('slug') in works]
     imgs = []
     for i, sl in enumerate(slides):
         w = works[sl['slug']]
@@ -315,7 +315,7 @@ def page_index(site, works):
         cls = ' class="is-active"' if i == 0 else ''
         dots.append('        <button type="button"%s data-dot aria-label="%sを表示">'
                     '<span></span></button>' % (cls, A(short_title(sl['title']))))
-    s0 = slides[0]
+    s0 = slides[0] if slides else {'title': '', 'year': '', 'place': '', 'slug': ''}
     cap = ('<span class="slide-caption__title">%s</span>　%s　%s'
            % (T(s0['title']), T(s0['year']), T(s0['place'])))
     main = ['  <main class="main main--top">',
@@ -323,7 +323,7 @@ def page_index(site, works):
             '    <div class="slideshow" data-slideshow data-seconds="%d">' % int(site.get('slideshow_seconds', 6)),
             '\n'.join(imgs),
             '      <a class="slideshow__link" data-slide-link href="works/%s.html" aria-label="%sの作品ページを開く"></a>'
-            % (A(slides[0]['slug']), A(short_title(slides[0]['title']))),
+            % (A(s0['slug']), A(short_title(s0['title']))),
             '    </div>', '',
             '    <div class="slide-bar">',
             '      <p class="slide-caption" data-slide-caption>%s</p>' % cap,
