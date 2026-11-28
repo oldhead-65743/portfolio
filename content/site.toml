@@ -167,12 +167,12 @@ venue_en = "Hotaka Learning Center 'Mirai', Azumino, Nagano, Japan"
 period = "2023年9月17日〜2023年9月24日"
 works = ["kagaku"]
 
-[workshop]
+[[workshop]]
 date = "2023.09"
 text = "安曇野市×京都芸術大学連携アートプロジェクト　安曇野市立豊科北中学校"
 text_en = "Azumino City x Kyoto University of Arts Collaborative Art Project, Toyoshina Kita Junior High School, Azumino, Nagano, Japan"
 
-[award]
+[[award]]
 date = "2025.02"
 text = "京都芸術大学 大学院修了展　優秀賞"
 text_en = "Kyoto University of Arts Graduate School Completion Exhibition, Excellence Award"

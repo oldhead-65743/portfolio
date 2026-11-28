@@ -489,17 +489,22 @@ def page_exhibitions(site, works):
                        '        </div>\n'
                        '      </div>' % (T(d), T(name), T(venue), links))
         return '\n\n'.join(out)
-    ws, aw = site['workshop'], site['award']
+    ws, aw = site.get('workshop', []), site.get('award', [])
     def panel(lang, hidden):
         en = (lang == 'en')
         hid = ' hidden' if hidden else ''
         h_exh = 'Group Exhibitions' if en else 'グループ展'
         h_ws = 'Workshop' if en else 'ワークショップ'
         h_aw = 'Award' if en else '受賞'
-        ws_d = date_en(ws['date']) if en else ym_ja(ws['date'])
-        ws_t = ws.get('text_en', ws['text']) if en else ws['text']
-        aw_d = date_en(aw['date']) if en else ym_ja(aw['date'])
-        aw_t = aw.get('text_en', aw['text']) if en else aw['text']
+        def minis(items):
+            rows = []
+            for it in items:
+                d = date_en(it['date']) if en else ym_ja(it['date'])
+                t = it.get('text_en', it['text']) if en else it['text']
+                rows.append('        <div class="exh-mini">\n'
+                            '          <span class="exh-mini__date">%s</span>\n          <span>%s</span>\n'
+                            '        </div>' % (T(d), T(t)))
+            return '\n'.join(rows)
         return ('      <div class="exh-lang" data-lang="%s" lang="%s"%s>\n'
                 '%s'
                 '    <section class="exh-section">\n'
@@ -508,20 +513,16 @@ def page_exhibitions(site, works):
                 '    <div class="exh-cols">\n'
                 '      <section class="exh-col">\n'
                 '        <h2 class="exh-section__title">%s</h2>\n'
-                '        <div class="exh-mini">\n'
-                '          <span class="exh-mini__date">%s</span>\n          <span>%s</span>\n'
-                '        </div>\n'
+                '%s\n'
                 '      </section>\n\n'
                 '      <section class="exh-col">\n'
                 '        <h2 class="exh-section__title">%s</h2>\n'
-                '        <div class="exh-mini">\n'
-                '          <span class="exh-mini__date">%s</span>\n          <span>%s</span>\n'
-                '        </div>\n'
+                '%s\n'
                 '      </section>\n'
                 '    </div>\n'
                 '      </div>'
                 % (lang, lang, hid, exh_now_group(site, lang), T(h_exh), exh_rows(lang),
-                   T(h_ws), T(ws_d), T(ws_t), T(h_aw), T(aw_d), T(aw_t)))
+                   T(h_ws), minis(ws), T(h_aw), minis(aw)))
     main = ('  <main class="main main--exh">\n'
             '    <div class="about-head">\n'
             '      <h1 class="page-title">Exhibitions</h1>\n'
