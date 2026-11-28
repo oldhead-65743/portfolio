@@ -1,6 +1,6 @@
-# サイト全体設定。base_url を本番URLに変えて再ビルドすれば OGP/canonical/sitemap が確定します。
+# サイト全体設定（管理アプリが生成）。base_url を本番URLにして再ビルドすると OGP/canonical/sitemap が確定します。
 base_url = "https://oldhead-65743.github.io/portfolio"
-google_verification = "brUbLHGwwq5DJDjAAkZYOG1Z2SY_Su3hBTD4HuJQnXY"  # Google Search Console 所有権確認
+google_verification = "brUbLHGwwq5DJDjAAkZYOG1Z2SY_Su3hBTD4HuJQnXY"
 site_name = "若尾 俊 SHUN WAKAO"
 artist_ja = "若尾 俊"
 artist_en = "SHUN WAKAO"
@@ -9,22 +9,20 @@ instagram_url = "https://www.instagram.com/wakaoshun_artworks/"
 instagram_handle = "@wakaoshun_artworks"
 contact_intro = "展示・制作のご依頼、取材などのお問い合わせは、以下のフォームからお送りください。"
 copyright = "© Shun Wakao"
-image_max = 1800   # Web用画像の長辺(px)。ビルド時にこれを超える元画像を縮小。
+image_max = 1800
 slideshow_seconds = 6
 
-# お問い合わせフォーム。maintenance=true の間は網掛けで「整備中」表示にし、入力を無効化します。
 [contact]
 maintenance = true
 maintenance_label = "整備中"
 maintenance_note = "お問い合わせフォームは現在準備中です。ご連絡は当面 Instagram のメッセージよりお願いいたします。"
 
 [now_on_view]
-enabled = true          # 開催中の展示がないときは false で非表示
-exhibition = "2026.09"  # グループ展（[[exhibitions]]）の date を参照（名称・会場・会期・URLはそちらから取得）
+enabled = true
+exhibition = "2026.09"
 link = "exhibitions.html"
 more = "詳しく見る →"
 
-# 次回展示（予定）。enabled=false で非表示にできます。
 [upcoming]
 enabled = true
 label = "UPCOMING"
@@ -35,7 +33,7 @@ venue_en = "Kameyama, Mie, Japan"
 period = "2027年10月31日〜2027年11月20日"
 link = "exhibitions.html"
 more = "詳しく見る →"
-event_url = "https://kameyamatriennale.com/gui-shantorien-nare-2027.html"  # 展覧会公式ページ
+event_url = "https://kameyamatriennale.com/gui-shantorien-nare-2027.html"
 
 [about]
 cv_head_ja = "学歴・職歴"
@@ -62,6 +60,13 @@ cv_en = [
   ["Apr. 2017", "Medical device manufacturer, Research and Development Division (current position)"],
   ["Mar. 2025", "Graduated from Kyoto University of Arts, Master Course, Art Environment, Toyomi Hoshina Lab."],
 ]
+
+[[slideshow]]
+slug = "replay"
+title = "《再生/手触》"
+year = "2026"
+place = "見る聞く うるし　安曇野髙橋節郎記念美術館"
+alt = ""
 
 [[slideshow]]
 slug = "mizu"
