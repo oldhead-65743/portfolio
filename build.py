@@ -140,7 +140,7 @@ def _banner(cfg, modifier=''):
 
 def now_group(site):
     parts = [_banner(resolve_now(site) or {}),
-             _banner(site.get('upcoming', {}), 'now-on-view--upcoming')]
+             _banner(resolve_upcoming(site) or {}, 'now-on-view--upcoming')]
     parts = [p for p in parts if p]
     if not parts:
         return ''
@@ -216,6 +216,21 @@ def resolve_now(site):
         'more': nv.get('more', '詳しく見る →'),
     }
 
+def resolve_upcoming(site):
+    """upcoming（次回展示）の period・venue から表示用 cfg を組み立てる。"""
+    up = site.get('upcoming', {})
+    if not up.get('enabled'):
+        return None
+    return {
+        'enabled': True, 'label': up.get('label', 'UPCOMING'),
+        'title': up.get('title', ''), 'title_en': up.get('title_en', up.get('title', '')),
+        'meta': '%s　%s' % (up.get('period', ''), up.get('venue', '')),
+        'meta_en': '%s · %s' % (period_en(up.get('period', '')), up.get('venue_en', '')),
+        'event_url': up.get('event_url', ''),
+        'link': up.get('link', 'exhibitions.html'),
+        'more': up.get('more', '詳しく見る →'),
+    }
+
 def _exh_box(cfg, modifier='', lang='ja'):
     if not cfg.get('enabled'):
         return ''
@@ -248,7 +263,7 @@ def _exh_box(cfg, modifier='', lang='ja'):
 
 def exh_now_group(site, lang='ja'):
     parts = [_exh_box(resolve_now(site) or {}, '', lang),
-             _exh_box(site.get('upcoming', {}), 'exh-now--upcoming', lang)]
+             _exh_box(resolve_upcoming(site) or {}, 'exh-now--upcoming', lang)]
     parts = [p for p in parts if p]
     if not parts:
         return ''
